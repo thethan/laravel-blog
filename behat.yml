@@ -1,0 +1,10 @@
+extensions:
+  Behat\WebApiExtension: ~
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+    catalog:
+      paths: [ %paths.base%/features/API/catalog ]
+      contexts: [ CatalogContext ]
