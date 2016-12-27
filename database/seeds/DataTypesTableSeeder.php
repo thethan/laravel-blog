@@ -21,7 +21,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_singular' => 'Post',
                 'display_name_plural'   => 'Posts',
                 'icon'                  => 'voyager-news',
-                'model_name'            => 'TCG\\Voyager\\Models\\Post',
+                'model_name'            => 'App\\Post',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();

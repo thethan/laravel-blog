@@ -55,6 +55,7 @@
 @stop
 
 @section('content')
+
     <div class="page-content container-fluid">
         <form role="form" action="@if(isset($dataTypeContent->id)){{ route('voyager.posts.update', $dataTypeContent->id) }}@else{{ route('voyager.posts.store') }}@endif" method="POST" enctype="multipart/form-data">
             <!-- PUT Method if we are editing -->
@@ -135,9 +136,23 @@
                                 <label for="name">Post Category</label>
                                 <select class="form-control" name="category_id">
                                     @foreach(TCG\Voyager\Models\Category::all() as $category)
-                                        <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
+                                        <option value="{{ (int)$category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Post Tags</label>
+                                <select id="select-tag" name="tags[]" multiple class="demo-default" style="width:50%" placeholder="Select Tags...">
+                                    @php
+                                        $tag_ids = $dataTypeContent->tags->map(function ($value){
+                                            return $value->id;
+                                        });
+                                    @endphp
+                                    @foreach(App\Tag::all() as $tag)
+                                        <option value="{{ $tag->name}}" @if(in_array($tag->id, $tag_ids->all())){{ 'selected' }}@endif>{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="form-group">
                                 <label for="name">Featured</label>
@@ -209,4 +224,19 @@
 @section('javascript')
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
+    <script src="/js/selectize.js"></script>
+    <script>
+        $('#tags_select').selectize();
+
+    </script>
+    <script>
+        $('#select-tag').selectize({
+            create: true
+        });
+    </script>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/selectize/normaize.css">
+    <link rel="stylesheet" href="/css/selectize/stylesheet.css">
 @stop

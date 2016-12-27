@@ -231,6 +231,8 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
 
+
+
         $dataRow = DataRow::firstOrNew([
             'data_type_id' => $postDataType->id,
             'field'        => 'created_at',

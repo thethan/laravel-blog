@@ -19,32 +19,42 @@
                 </article>
                 <aside class="column is-4">
                     @if($post->category)
-                        <h3><a href="{{ route('getCategory', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a></h3>
+                        <h3>
+                            <a href="{{ route('getCategory', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a>
+                        </h3>
                         @php
                             $categoryPosts = $post->category->posts->sortBy('created_at');
                         @endphp
                         <ul>
-                        @foreach($categoryPosts as $catPost)
-                            @if($catPost->id !== $post->id)
-                                <li><a href="{{ route('getPost', ['slug' => $catPost->slug]) }}">{{ $catPost->name }}</a></li>
-                            @endif
-                        @endforeach
+                            @foreach($categoryPosts as $catPost)
+                                @if($catPost->id !== $post->id)
+                                    <li>
+                                        <a href="{{ route('getPost', ['slug' => $catPost->slug]) }}">{{ $catPost->name }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
                         </ul>
 
                     @endif
 
-                    @if($post->tags)
-                    <h4>Tags:</h4>
+                    @if($post->tags->first())
+                        <h4>Tags:</h4>
                         @foreach($post->tags as $tag)
-                            <a href="{{ $tag->slug }}" class="tag is-success">{{ $tag->name }}</a>
+                            <a href="{{ route('getTag', ['slug' =>$tag->slug]) }}" class="tag is-success">{{ $tag->name }}</a>
                         @endforeach
 
-                        @endif
+                    @endif
                 </aside>
             </div>
         </div>
     </section>
 @endsection
+
+@push('meta')
+    <title>{{ $post->seo_title or $post->title }} </title>
+    <meta name="description" content="{{ $post->meta_description }}">
+    <meta name="keywords" content="{{$post->meta_keywords}}t">
+@endpush
 
 @push('styles')
 <style>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ $title or Voyager::setting('title')}} </title>
-    <meta name="description" content="{!! Voyager::setting('description') !!}">
+
+    @stack('meta')
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @stack('styles')
     <script>
@@ -10,6 +11,7 @@
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
 <div class="container-fluid">
