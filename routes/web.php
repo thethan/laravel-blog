@@ -142,7 +142,7 @@ Route::auth();
 Route::group(['prefix' => 'blog'], function () {
     Route::get('{slug}', 'PostsController@get')->name('getPost');
 
-    Route::get('/', 'PostsController@index')->name('posts');
+    Route::get('/', 'PostsController@blogindex')->name('posts');
 });
 
 // Categories
