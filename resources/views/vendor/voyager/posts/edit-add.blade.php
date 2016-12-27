@@ -45,6 +45,23 @@
             overflow-x: hidden;
             min-height: 100%;
         }
+        .items.has-items {
+            width: 100%;
+            display: inline-flex;
+            border:2px grey;
+        }
+        .items.has-items .item {
+           flex: auto;
+            border: 1px solid #00acee;
+            -webkit-border-radius:3px 3px 3px 3px;
+            -moz-border-radius:3px 3px 3px 3px;
+            border-radius:3px 3px 3px 3px;
+        }
+        .selectize-dropdown {
+            display: block;
+            width: 100%;
+            border: 1px solid #333333;
+        }
     </style>
 @stop
 
@@ -135,6 +152,14 @@
                                        value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
                             </div>
                             <div class="form-group">
+                                <label for="name">Rating</label>
+                                <select  class="form-control" name="rating_id" placeholder="rating">
+                                    @foreach(App\Rating::all() as $rating)
+                                        <option value="{{ (int)$rating->id }}" @if(isset($dataTypeContent->rating_id) && $dataTypeContent->rating_id == $rating->id){{ 'selected="selected"' }}@endif>{{ $rating->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="name">Post Status</label>
                                 <select class="form-control" name="status">
                                     <option value="PUBLISHED" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED'){{ 'selected="selected"' }}@endif>
@@ -158,7 +183,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Post Tags</label>
-                                <select id="select-tag" name="tags[]" multiple class="demo-default" style="width:50%"
+                                <select id="select-tag" name="tags[]" multiple class="demo-default"
                                         placeholder="Select Tags...">
                                     @php
                                         if(isset($dataTypeContent->tags)){
@@ -166,7 +191,7 @@
                                            return $value->id;
                                        });
                                        } else{
-                                       $tag_ids = new \Illuminate\Database\Eloquent\Collection();
+                                        $tag_ids = new \Illuminate\Database\Eloquent\Collection();
                                        }
                                     @endphp
                                     @foreach(App\Tag::all() as $tag)

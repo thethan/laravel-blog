@@ -45,4 +45,9 @@ class Post extends VoyagerPost
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function ratings()
+    {
+        return $this->belongsTo(Rating::class);
+    }
 }

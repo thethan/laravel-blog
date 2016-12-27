@@ -176,6 +176,13 @@ Route::group(['prefix' => 'tag'], function () {
 
 });
 
+
+Route::group(['prefix' => 'ratings', 'as' => 'ratings.'], function () {
+    Route::get('/',['uses' => 'RatingsController@index', 'as' => 'index']);
+
+    Route::get('{slug}',['uses' => 'RatingsController@show', 'as' => 'show']);
+});
+
 // Needs to be last since it involves slugs
 // Routes for the pages
 Route::get('{slug}', function ($slug) {
@@ -183,36 +190,10 @@ Route::get('{slug}', function ($slug) {
 
     return view('posts.post', $page->toArray());
 })->name('getPage');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+//Auth::routes();
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
