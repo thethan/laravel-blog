@@ -32,7 +32,7 @@
         }
 
         .panel.is-fullscreen .mce-tinymce {
-            height:100%;
+            height: 100%;
         }
 
         .panel.is-fullscreen .mce-edit-area,
@@ -57,7 +57,9 @@
 @section('content')
 
     <div class="page-content container-fluid">
-        <form role="form" action="@if(isset($dataTypeContent->id)){{ route('voyager.posts.update', $dataTypeContent->id) }}@else{{ route('voyager.posts.store') }}@endif" method="POST" enctype="multipart/form-data">
+        <form role="form"
+              action="@if(isset($dataTypeContent->id)){{ route('voyager.posts.update', $dataTypeContent->id) }}@else{{ route('voyager.posts.store') }}@endif"
+              method="POST" enctype="multipart/form-data">
             <!-- PUT Method if we are editing -->
             @if(isset($dataTypeContent->id))
                 {{ method_field("PUT") }}
@@ -74,11 +76,13 @@
                                 <span class="panel-desc"> The title for your post</span>
                             </h3>
                             <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse"
+                                   aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" name="title" placeholder="Title" value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
+                            <input type="text" class="form-control" name="title" placeholder="Title"
+                                   value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
                         </div>
                     </div>
 
@@ -87,7 +91,8 @@
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="icon wb-book"></i> Post Content</h3>
                             <div class="panel-actions">
-                                <a class="panel-action voyager-resize-full" data-toggle="panel-fullscreen" aria-hidden="true"></a>
+                                <a class="panel-action voyager-resize-full" data-toggle="panel-fullscreen"
+                                   aria-hidden="true"></a>
                             </div>
                         </div>
                         <textarea class="richTextBox" name="body" style="border:0px;">
@@ -98,9 +103,12 @@
                     <!-- ### EXCERPT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Excerpt <small>Small description of this post</small></h3>
+                            <h3 class="panel-title">Excerpt
+                                <small>Small description of this post</small>
+                            </h3>
                             <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse"
+                                   aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -116,20 +124,28 @@
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="icon wb-clipboard"></i> Post Details</h3>
                             <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse"
+                                   aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="name">URL slug</label>
-                                <input type="text" class="form-control" name="slug" placeholder="slug" value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
+                                <input type="text" class="form-control" name="slug" placeholder="slug"
+                                       value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
                             </div>
                             <div class="form-group">
                                 <label for="name">Post Status</label>
                                 <select class="form-control" name="status">
-                                    <option value="PUBLISHED" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED'){{ 'selected="selected"' }}@endif>published</option>
-                                    <option value="DRAFT" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT'){{ 'selected="selected"' }}@endif>draft</option>
-                                    <option value="PENDING" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING'){{ 'selected="selected"' }}@endif>pending</option>
+                                    <option value="PUBLISHED" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED'){{ 'selected="selected"' }}@endif>
+                                        published
+                                    </option>
+                                    <option value="DRAFT" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT'){{ 'selected="selected"' }}@endif>
+                                        draft
+                                    </option>
+                                    <option value="PENDING" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING'){{ 'selected="selected"' }}@endif>
+                                        pending
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -142,15 +158,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Post Tags</label>
-                                <select id="select-tag" name="tags[]" multiple class="demo-default" style="width:50%" placeholder="Select Tags...">
+                                <select id="select-tag" name="tags[]" multiple class="demo-default" style="width:50%"
+                                        placeholder="Select Tags...">
                                     @php
-                                        if($dataTypeContent->tags){
-                                        $tag_ids = $dataTypeContent->tags->map(function ($value){
-                                            return $value->id;
-                                        });
-                                        } else{
-                                        $tag_ids = new \Illuminate\Database\Eloquent\Collection();
-                                        }
+                                        if(isset($dataTypeContent->tags)){
+                                       $tag_ids = $dataTypeContent->tags->map(function ($value){
+                                           return $value->id;
+                                       });
+                                       } else{
+                                       $tag_ids = new \Illuminate\Database\Eloquent\Collection();
+                                       }
                                     @endphp
                                     @foreach(App\Tag::all() as $tag)
                                         <option value="{{ $tag->name}}" @if(in_array($tag->id, $tag_ids->all())){{ 'selected' }}@endif>{{ $tag->name }}</option>
@@ -160,7 +177,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Featured</label>
-                                <input type="checkbox" name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif>
+                                <input type="checkbox"
+                                       name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif>
                             </div>
                         </div>
                     </div>
@@ -170,12 +188,13 @@
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="icon wb-image"></i> Post Image</h3>
                             <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse"
+                                   aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
-                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%"/>
                             @endif
                             <input type="file" name="image">
                         </div>
@@ -186,7 +205,8 @@
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="icon wb-search"></i> SEO Content</h3>
                             <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse"
+                                   aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -204,7 +224,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">SEO Title</label>
-                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
+                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title"
+                                       value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
                             </div>
                         </div>
                     </div>
@@ -217,7 +238,8 @@
         </form>
 
         <iframe id="form_target" name="form_target" style="display:none"></iframe>
-        <form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+        <form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post"
+              enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
             {{ csrf_field() }}
             <input name="image" id="upload_file" type="file" onchange="$('#my_form').submit();this.value='';">
             <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
