@@ -144,9 +144,13 @@
                                 <label for="name">Post Tags</label>
                                 <select id="select-tag" name="tags[]" multiple class="demo-default" style="width:50%" placeholder="Select Tags...">
                                     @php
+                                        if($dataTypeContent->tags){
                                         $tag_ids = $dataTypeContent->tags->map(function ($value){
                                             return $value->id;
                                         });
+                                        } else{
+                                        $tag_ids = new \Illuminate\Database\Eloquent\Collection();
+                                        }
                                     @endphp
                                     @foreach(App\Tag::all() as $tag)
                                         <option value="{{ $tag->name}}" @if(in_array($tag->id, $tag_ids->all())){{ 'selected' }}@endif>{{ $tag->name }}</option>
