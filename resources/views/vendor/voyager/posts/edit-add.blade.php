@@ -103,6 +103,8 @@
                         </div>
                     </div>
 
+
+
                     <!-- ### CONTENT ### -->
                     <div class="panel">
                         <div class="panel-heading">
@@ -150,6 +152,12 @@
                                 <label for="name">URL slug</label>
                                 <input type="text" class="form-control" name="slug" placeholder="slug"
                                        value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Where you met</label>
+                                <input type="text" class="form-control" name="where" placeholder="where"
+                                       value="@if(isset($dataTypeContent->where)){{ $dataTypeContent->where }}@endif">
                             </div>
                             <div class="form-group">
                                 <label for="name">Rating</label>

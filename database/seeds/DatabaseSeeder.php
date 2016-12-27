@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(CategoryIdTableSeed::class);
          $this->call(RatingsIdTableSeeder::class);
+         $this->call(WhereStringPostsTableSeeder::class);
     }
 }

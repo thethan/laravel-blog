@@ -13,7 +13,7 @@ class WhereStringPostsTableSeeder extends Seeder
     {
         $postDataType = \TCG\Voyager\Models\DataType::where('slug', 'posts')->firstOrFail();
 
-        $dataRow = DataRow::firstOrNew(['data_type_id' => $postDataType->id, 'field' => 'where',]);
+        $dataRow = \TCG\Voyager\Models\DataRow::firstOrNew(['data_type_id' => $postDataType->id, 'field' => 'where',]);
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type' => 'text',
