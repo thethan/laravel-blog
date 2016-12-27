@@ -139,8 +139,8 @@ Route::auth();
 
 
 //Posts
-Route::group(['prefix' => 'blog'], function () {
-    Route::get('{slug}', 'PostsController@get')->name('getPost');
+Route::group(['prefix' => 'encounters', 'as' => 'blog.'], function () {
+    Route::get('{slug}', 'PostsController@get')->name('show');
 
     Route::get('/', 'PostsController@blogindex')->name('posts');
 });
@@ -161,12 +161,12 @@ Route::group(['prefix' => 'category'], function () {
 
 });
 
-Route::group(['prefix' => 'tag'], function () {
+Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     Route::get('{slug}', function ($slug) {
         $tag = \App\Tag::where('slug', $slug)->first();
 
-        return $tag;
-    })->name('getTag');
+        return view('tags.show', compact('tag'));
+    })->name('show');
 
     Route::get('/', function () {
         $tags = \App\Tag::all();

@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class="hero is-medium is-success is-bold">
+    <section class="hero is-medium is-primary is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
@@ -29,7 +29,7 @@
                             @foreach($categoryPosts as $catPost)
                                 @if($catPost->id !== $post->id)
                                     <li>
-                                        <a href="{{ route('getPost', ['slug' => $catPost->slug]) }}">{{ $catPost->name }}</a>
+                                        <a href="{{ route('blog.show', ['slug' => $catPost->slug]) }}">{{ $catPost->name }}</a>
                                     </li>
                                 @endif
                             @endforeach
@@ -40,7 +40,7 @@
                     @if($post->tags->first())
                         <h4>Tags:</h4>
                         @foreach($post->tags as $tag)
-                            <a href="{{ route('getTag', ['slug' =>$tag->slug]) }}" class="tag is-success">{{ $tag->name }}</a>
+                            <a href="{{ route('tags.show', ['slug' => $tag->slug]) }}" class="tag is-success">{{ $tag->name }}</a>
                         @endforeach
 
                     @endif

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <section class="hero is-medium is-success is-bold">
+    <section class="hero is-medium is-primary is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">

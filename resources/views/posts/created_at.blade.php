@@ -1,0 +1,1 @@
+<h4 class="">{{ $post->created_at }}</h4>
