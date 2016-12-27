@@ -142,7 +142,7 @@ Route::auth();
 Route::group(['prefix' => 'encounters', 'as' => 'blog.'], function () {
     Route::get('{slug}', 'PostsController@get')->name('show');
 
-    Route::get('/', 'PostsController@blogindex')->name('posts');
+    Route::get('/', 'PostsController@blogindex')->name('all');
 });
 
 // Categories

@@ -22,9 +22,7 @@
                 @endphp
                 {{ $posts->links() }}
                 @foreach ($posts as $post)
-                    @foreach ($posts as $post)
                         @include('posts.listing.articleblock')
-                    @endforeach
                 @endforeach
                 <aside class="column is-4">
                     <nav>

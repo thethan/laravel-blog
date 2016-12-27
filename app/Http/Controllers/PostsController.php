@@ -14,9 +14,10 @@ use TCG\Voyager\Voyager;
 
 class PostsController extends VoyagerBreadController
 {
-    public function blogindex()
+    public function blogindex(Request $request)
     {
-        return Post::all();
+        $posts = Post::paginate();
+        return view('posts.list', compact('posts'));
     }
 
 
