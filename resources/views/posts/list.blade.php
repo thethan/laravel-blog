@@ -2,11 +2,11 @@
 
 
 @section('content')
-    <section class="hero is-medium is-primary is-bold">
+    <section class="hero is-medium is-dark is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    Encounters
+                    Blog
                 </h1>
 
             </div>

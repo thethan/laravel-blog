@@ -14,19 +14,9 @@
 
 </head>
 <body>
-<div class="container-fluid">
-    @include('layouts.menu.nav')
 
     @yield('content')
 
-    <footer class="footer">
-        <div class="container">
-            <div class="content has-text-centered">
-
-            </div>
-        </div>
-    </footer>
-</div>
 <script>
 
     document.getElementById("nav-toggle").addEventListener("click", toggleNav);

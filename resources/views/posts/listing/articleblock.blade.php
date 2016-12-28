@@ -1,4 +1,4 @@
-<article class="column is-8 media">
+<article class="column media">
     <div class="media-content">
         <div class="content">
             <h3 class="title is-3">

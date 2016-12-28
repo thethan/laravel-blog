@@ -139,7 +139,7 @@ Route::auth();
 
 
 //Posts
-Route::group(['prefix' => 'encounters', 'as' => 'blog.'], function () {
+Route::group(['prefix' => 'blog', 'as' => 'blog.'], function () {
     Route::get('{slug}', 'PostsController@get')->name('show');
 
     Route::get('/', 'PostsController@blogindex')->name('all');

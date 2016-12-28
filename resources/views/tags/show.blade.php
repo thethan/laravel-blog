@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class="hero is-medium is-primary is-bold">
+    <section class="hero is-medium is-dark is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
@@ -16,12 +16,15 @@
             <div class="columns">
                 @php
                     $posts = $tag->posts()->paginate();
-
                 @endphp
-                {{ $posts->links() }}
-                @foreach ($posts as $post)
-                    @include('posts.listing.articleblock')
-                @endforeach
+                <div class="column is-8">
+                    {{ $posts->links() }}
+                    @foreach ($posts as $post)
+
+                        @include('posts.listing.articleblock')
+
+                    @endforeach
+                </div>
                 <aside class="column is-4">
                     <h5 class="title is-3">More Tags</h5>
                     <nav>
