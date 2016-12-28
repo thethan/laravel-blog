@@ -6,7 +6,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    {{ $tag->name }}
+                    {{ $category->name }}
                 </h1>
             </div>
         </div>
@@ -15,7 +15,7 @@
         <div class="container">
             <div class="columns">
                 @php
-                    $posts = $tag->posts()->paginate();
+                    $posts = $category->posts()->paginate();
 
                 @endphp
                 {{ $posts->links() }}
@@ -23,10 +23,10 @@
                     @include('posts.listing.articleblock')
                 @endforeach
                 <aside class="column is-4">
-                    <h5 class="title is-3">More Tags</h5>
+                    <h5 class="title is-3">More Categories</h5>
                     <nav>
-                        @foreach(App\Tag::all() as $nav)
-                            @if($nav->id !== $tag->id)
+                        @foreach(App\Category::all() as $nav)
+                            @if($nav->id !== $category->id)
                                 <a href="{{ route('tags.show', ['slug' =>$nav->slug]) }}"
                                    class="tag is-primary">{{ $nav->name }}</a>
                             @endif

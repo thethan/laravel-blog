@@ -146,12 +146,12 @@ Route::group(['prefix' => 'encounters', 'as' => 'blog.'], function () {
 });
 
 // Categories
-Route::group(['prefix' => 'category'], function () {
+Route::group(['prefix' => 'category', 'as' => 'categories.'], function () {
     Route::get('{slug}', function ($slug) {
         $category = TCG\Voyager\Models\Category::where('slug', $slug)->first();
 
-        return view('posts.post', compact($category->toArray()));
-    })->name('getCategory');
+        return view('categories.show', compact('category'));
+    })->name('show');
 
     Route::get('/', function () {
         $categories = TCG\Voyager\Models\Category::all();

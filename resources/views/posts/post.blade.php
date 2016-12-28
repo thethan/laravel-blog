@@ -19,8 +19,8 @@
                 </article>
                 <aside class="column is-4">
                     @if($post->category)
-                        <h3>
-                            <a href="{{ route('getCategory', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a>
+                        <h3 class="title is-4">
+                            <a href="{{ route('categories.show', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a>
                         </h3>
                         @php
                             $categoryPosts = $post->category->posts->sortBy('created_at');
@@ -40,7 +40,7 @@
                     @if($post->tags->first())
                         <h4>Tags:</h4>
                         @foreach($post->tags as $tag)
-                            <a href="{{ route('tags.show', ['slug' => $tag->slug]) }}" class="tag is-success">{{ $tag->name }}</a>
+                            <a href="{{ route('tags.show', ['slug' => $tag->slug]) }}" class="tag is-primary">{{ $tag->name }}</a>
                         @endforeach
 
                     @endif
