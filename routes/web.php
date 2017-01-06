@@ -177,12 +177,6 @@ Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
 });
 
 
-Route::group(['prefix' => 'ratings', 'as' => 'ratings.'], function () {
-    Route::get('/',['uses' => 'RatingsController@index', 'as' => 'index']);
-
-    Route::get('{slug}',['uses' => 'RatingsController@show', 'as' => 'show']);
-});
-
 // Needs to be last since it involves slugs
 // Routes for the pages
 Route::get('{slug}', function ($slug) {
@@ -197,3 +191,8 @@ Route::get('{slug}', function ($slug) {
 
 
 
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
